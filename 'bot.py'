@@ -1,0 +1,20 @@
+import telebot
+
+API_TOKEN = '9115280915:AAFDPRCVa7D0eRf16cxj-pX8GW4PTUTtSPk'
+bot = telebot.TeleBot(API_TOKEN)
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    user_id = message.from_user.id
+    username = bot.get_me().username
+    referral_link = f"https://t.me/{username}?start={user_id}"
+    
+    welcome_text = (
+        f"নমস্কার! আমাদের রেফারেল বডে আপনাকে স্বাগত.\n\n"
+        f"আপনার পার্সোনাল রেফারেল লিংক নিচে দেওয়া হলো:\n{referral_link}\n\n"
+        "এই লিংকটি শেয়ার করুন এবং বন্ধুদের ইনভাইট করুন!"
+    )
+    bot.reply_to(message, welcome_text)
+
+print("বটটি চালু হচ্ছে...")
+bot.polling()
